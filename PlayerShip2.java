@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
 import ccGame.OceanExplorer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -99,14 +98,14 @@ public class PlayerShip2 extends Observable implements Character2{
 				notifyOfChanges();
 			}
 		}
-		//	===============================================================================================================================================================
+	//	===============================================================================================================================================================
 	
 	
 	
-		//	====== Ensure move is legal ===================================================================================================================================
-		private boolean checkLeft(int xPos, int yPos) {									// ==== Is the move on the grid =================================================== 
+	//	====== Ensure move is legal ===================================================================================================================================
+		private boolean checkLeft(int xPos, int yPos) {					// ==== Is the move on the grid =================================================== 
 			if (xPos > 0) {																 
-				if (!grid[xPos-1][yPos]) {												// ==== Verifies this tile is not an island before saying the move is legal =======
+				if (!grid[xPos-1][yPos]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -114,8 +113,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 	
 		private boolean checkRight(int xPos, int yPos) {
-			if (xPos < grid.length-1) {													// ==== Is the move on the grid ===================================================
-				if (!grid[xPos+1][yPos]) {												// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (xPos < grid.length-1) {						// ==== Is the move on the grid ===================================================
+				if (!grid[xPos+1][yPos]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -123,8 +122,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 	
 		private boolean checkUp(int xPos, int yPos) {
-			if (yPos > 0) {																// ==== Is the move on the grid ===================================================
-				if (!grid[xPos][yPos-1]) {												// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos > 0) {								// ==== Is the move on the grid ===================================================
+				if (!grid[xPos][yPos-1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -132,8 +131,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 	
 		private boolean checkDown(int xPos, int yPos) {
-			if (yPos < grid[0].length-1) {												// ==== Is the move on the grid ===================================================
-				if (!grid[xPos][yPos+1]) {												// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos < grid[0].length-1) {						// ==== Is the move on the grid ===================================================
+				if (!grid[xPos][yPos+1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -141,8 +140,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 		
 		private boolean checkUpLeft(int xPos, int yPos) {
-			if (yPos > 0 && xPos > 0) {													// ==== Is the move on the grid ===================================================
-				if (!grid[xPos-1][yPos-1]) {											// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos > 0 && xPos > 0) {						// ==== Is the move on the grid ===================================================
+				if (!grid[xPos-1][yPos-1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -150,8 +149,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 		
 		private boolean checkUpRight(int xPos, int yPos) {
-			if (yPos > 0 && xPos < grid.length-1) {										// ==== Is the move on the grid ===================================================
-				if (!grid[xPos+1][yPos-1]) {											// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos > 0 && xPos < grid.length-1) {					// ==== Is the move on the grid ===================================================
+				if (!grid[xPos+1][yPos-1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -159,8 +158,8 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 		
 		private boolean checkDownLeft(int xPos, int yPos) {
-			if (yPos < grid[0].length-1 && xPos > 0) {									// ==== Is the move on the grid ===================================================
-				if (!grid[xPos-1][yPos+1]) {											// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos < grid[0].length-1 && xPos > 0) {				// ==== Is the move on the grid ===================================================
+				if (!grid[xPos-1][yPos+1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
@@ -168,25 +167,25 @@ public class PlayerShip2 extends Observable implements Character2{
 		}
 		
 		private boolean checkDownRight(int xPos, int yPos) {
-			if (yPos < grid[0].length-1 && xPos < grid.length-1) {						// ==== Is the move on the grid ===================================================
-				if (!grid[xPos+1][yPos+1]) {											// ==== Verifies this tile is not an island before saying the move is legal =======
+			if (yPos < grid[0].length-1 && xPos < grid.length-1) {			// ==== Is the move on the grid ===================================================
+				if (!grid[xPos+1][yPos+1]) {					// ==== Verifies this tile is not an island before saying the move is legal =======
 					return true;
 				}
 			}
 			return false;
 		}
-		//	============================================================================================================================================================
+	//	===================================================================================================================================================================
 	
 		private void notifyOfChanges(){
 			setChanged();
 			notifyObservers();
 		}
-// =====================================================================================================================================================================
+	// 	===================================================================================================================================================================
  
 	
 	
 		
-	// ====================== Getters ==================================================================================================================================
+// ====================== Getters ================================================================================================================================================
 	
 	public ImageView getMyImage() {
 		return this.myImage;
