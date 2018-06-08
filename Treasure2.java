@@ -47,7 +47,7 @@ public class Treasure2 implements Observer, Character2{
 	
 	
 	
-	public double getDistance(double x, double y, Point playerPos){							// ===== Calculates the distance between a move and the player's position ===========
+	public double getDistance(double x, double y, Point playerPos){					// ===== Calculates the distance between a move and the player's position ===========
 		double xDist = x - playerPos.x;
 		double yDist = y - playerPos.y;
 		return Math.sqrt( (xDist)*(xDist) + (yDist)*(yDist) );
