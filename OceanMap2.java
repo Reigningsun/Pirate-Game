@@ -27,13 +27,13 @@ public class OceanMap2 {
 	// ======================== Functionality ==============================================================================================================================
 	public void placeIslands(){
 		Random r = new Random();
-		for (int i = 0 ; i < numOfIslands ; i++) {																	// Randomly place a specified # of island tiles on the grid 
+		for (int i = 0 ; i < numOfIslands ; i++) {									// Randomly place a specified # of island tiles on the grid 
 			int rX = 2 + r.nextInt(OceanExplorer2.dimension -2), rY = 2 + r.nextInt(OceanExplorer2.dimension -2);	// Randomly selects a legal coordinate pair of the grid ====
-																													// It assures no island will be immediately around player ==
-			if (map[rX][rY]) {																						// If the grid tile already contains an island try again ===
+																// It assures no island will be immediately around player ==
+			if (map[rX][rY]) {											// If the grid tile already contains an island try again ===
 				i--;
 			}
-			else {																									// Designate tile as an island
+			else {													// Designate tile as an island
 				map[rX][rY] = true;
 			}	
 		}
