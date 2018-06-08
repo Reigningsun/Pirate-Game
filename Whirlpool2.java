@@ -13,14 +13,14 @@ import javafx.scene.image.ImageView;
 public class Whirlpool2 implements Observer, Character2{
 
 	private boolean[][] grid;
-	private Point Pos;																	// === Whirlpools position =========================================================
+	private Point Pos;											// === Whirlpools position =========================================================
 	private ImageView myImage;
 	private Random rand = new Random(); 
 	ArrayList<Character2> contents = new ArrayList<Character2>();						// === Stores any characters trapped in whirlpool ==================================
 	ArrayList <Character2> NPCs = new ArrayList <Character2>();   						// === Stores any Non Player Characters ============================================
 	private PlayerShip2 player;
-	private Point playerPos;															// === Players position ============================================================
-	private int chanceToCapture = 60;													// === Change this to increase/decrease chance of trapping characters ==============
+	private Point playerPos;										// === Players position ============================================================
+	private int chanceToCapture = 60;									// === Change this to increase/decrease chance of trapping characters ==============
 	private Difficulty diff;
 	public boolean isTreasure = false;
 	
@@ -53,26 +53,26 @@ public class Whirlpool2 implements Observer, Character2{
 		//
 		
 		Iterator<Character2> npcs = NPCs.iterator();						
-		while (npcs.hasNext()){															// === Moves all contents of whirlpool towards it =================================
+		while (npcs.hasNext()){										// === Moves all contents of whirlpool towards it =================================
 			Character2 character = (Character2) npcs.next();
 			double dist = getDistance(Pos.x, Pos.y, character.getLoc());
-			if (!contents.contains(character) && dist <= sightRange()){					// === Grab any npcs in range not already grabbed =================================
+			if (!contents.contains(character) && dist <= sightRange()){				// === Grab any npcs in range not already grabbed =================================
 				
 				if (!character.isTreasure()){
 					contents.add(character);
 				}
 			}
-			if (contents.contains(character) && dist > sightRange()){					// === Release any npcs that are now out of range =================================
+			if (contents.contains(character) && dist > sightRange()){				// === Release any npcs that are now out of range =================================
 				contents.remove(character);
 			}
 		}
 		
 		Iterator<Character2> theContents = contents.iterator();						
-		while (theContents.hasNext()){													// === Attempts to move each of its contents towards it ===========================
+		while (theContents.hasNext()){									// === Attempts to move each of its contents towards it ===========================
 			Character2 content = (Character2) theContents.next();
 			int chanceRoll = rand.nextInt(100) + 1;
 
-			if (chanceRoll <= chanceToCapture){											// === Moves contents closer if they rolled <= chanceToCapture ====================
+			if (chanceRoll <= chanceToCapture){							// === Moves contents closer if they rolled <= chanceToCapture ====================
 				Point closer = moveCloserToWhirlpool(content);
 				content.setLoc(closer.x, closer.y);
 			}
@@ -80,7 +80,7 @@ public class Whirlpool2 implements Observer, Character2{
 	}
 
 	
-	public Point moveCloserToWhirlpool (Character2 character){							// === Moves the character to the tile that is closest legal move to the whirlpool =
+	public Point moveCloserToWhirlpool (Character2 character){						// === Moves the character to the tile that is closest legal move to the whirlpool =
 		double closest = Double.POSITIVE_INFINITY;
 		Point bestMove = new Point();
 		Point characterLoc = character.getLoc();
@@ -90,8 +90,8 @@ public class Whirlpool2 implements Observer, Character2{
 			for (int y = pY - 1; y < pY + 2; y++){
 				double dist = getDistance(x, y, Pos);					
 					
-				if (moveIsLegal(x, y) && dist < closest){								// ===== In theory this should be preventing the selection of island tiles =========
-					closest = dist;														// ===== while updating best move with the closest available tile ==================
+				if (moveIsLegal(x, y) && dist < closest){					// ===== In theory this should be preventing the selection of island tiles =========
+					closest = dist;								// ===== while updating best move with the closest available tile ==================
 					bestMove.setLocation(x, y);
 				}
 			}
@@ -100,14 +100,14 @@ public class Whirlpool2 implements Observer, Character2{
 	}
 
 	
-	public double getDistance(int x, int y, Point target){								// ===== Calculates the distance between a move and the target's position ===========
+	public double getDistance(int x, int y, Point target){							// ===== Calculates the distance between a move and the target's position ===========
 		int xDist = x - target.x;
 		int yDist = y - target.y;
 		return Math.sqrt( (xDist)*(xDist) + (yDist)*(yDist) );
 	}
 	
 	
-	public Point getRandMove(){															// === Chooses a legal random move ==================================================
+	public Point getRandMove(){										// === Chooses a legal random move ==================================================
 		Point randMove = new Point();
 		int pX = Pos.x;
 		int pY = Pos.y;
@@ -118,7 +118,7 @@ public class Whirlpool2 implements Observer, Character2{
 			int x = pX + baseNum + rand.nextInt(3);
 			int y = pY + baseNum + rand.nextInt(3);
 			
-			if (moveIsLegal(x, y)){														// === In theory this should be preventing the selection of island tiles =============
+			if (moveIsLegal(x, y)){									// === In theory this should be preventing the selection of island tiles =============
 				randMove.setLocation(x, y);
 				legalMoveNotFound = false;
 				return randMove;
@@ -145,12 +145,12 @@ public class Whirlpool2 implements Observer, Character2{
 	}
 	
 	
-	public boolean isIsland (int x, int y){												// === Verifies that this space is not occupied by an island =========================
+	public boolean isIsland (int x, int y){									// === Verifies that this space is not occupied by an island =========================
 		return grid[x][y];
 	}
 	
 	
-	public boolean legalX(int x){														// === Verifies this X is within bounds of the grid ==================================
+	public boolean legalX(int x){										// === Verifies this X is within bounds of the grid ==================================
 		if (x >= 0 && x <= grid.length - 1){ 
 			return true;
 		}
@@ -158,7 +158,7 @@ public class Whirlpool2 implements Observer, Character2{
 	}
 	
 	
-	public boolean legalY(int y){														// === Verifies this Y is within bounds of the grid ==================================
+	public boolean legalY(int y){										// === Verifies this Y is within bounds of the grid ==================================
 		if (y >= 0 && y <= grid[0].length - 1){
 			return true;
 		}
@@ -168,14 +168,14 @@ public class Whirlpool2 implements Observer, Character2{
 	// =======================================================================================================================================================================
 	
 	
-	public void addTo(Character2 character){											// Adds new character to contents 
+	public void addTo(Character2 character){								// Adds new character to contents 
 		contents.add(character);														
 	}
 	
 	
 	
 	
-	public void removeFrom(Character2 character){										// Removes the character from this container
+	public void removeFrom(Character2 character){								// Removes the character from this container
 		contents.remove(character);
 	}
 	
