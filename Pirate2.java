@@ -14,16 +14,16 @@ import javafx.scene.image.ImageView;
 public class Pirate2 implements Observer, Character2{
 	
 	// ========================= Variables and Constants ===================================================================================================================
-	protected Point piratePos;															// === Whirlpools position =========================================================
+	protected Point piratePos;																// === Pirates position =========================================================
 	protected ImageView myImage;
-	protected ImageView idleImg      = new ImageView(new Image("ccGame2/pirateShip.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true));      // =================
-	protected ImageView defendingImg = new ImageView(new Image("ccGame2/pirateDefending.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true)); // =================
-	protected ImageView chasingImg   = new ImageView(new Image("ccGame2/pirateChasing.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true));   // =================
+	protected ImageView idleImg      = new ImageView(new Image("ccGame2/pirateShip.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true));      	// =================
+	protected ImageView defendingImg = new ImageView(new Image("ccGame2/pirateDefending.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true)); 	// =================
+	protected ImageView chasingImg   = new ImageView(new Image("ccGame2/pirateChasing.png", OceanExplorer2.scale, OceanExplorer2.scale, true, true));   	// =================
 	private boolean[][] grid;
 	private Random rand = new Random(); 
-	protected Point playerPos;															// === Players position ============================================================
-	protected int timeSincePlayerLastSeen;												// === Keeps track of turns since the player was last seen =========================
-	protected Point lastSeenPlayerPos;													// === Keeps track of the last place the player was seen for use with flare ========
+	protected Point playerPos;																// === Players position ============================================================
+	protected int timeSincePlayerLastSeen;															// === Keeps track of turns since the player was last seen =========================
+	protected Point lastSeenPlayerPos;															// === Keeps track of the last place the player was seen for use with flare ========
 	protected State2 idle;
 	protected State2 defending;
 	protected State2 chasing;
@@ -91,7 +91,7 @@ public class Pirate2 implements Observer, Character2{
 
 	
 	// ======================== Chase Behavior =============================================================================================================================
-	public Point getBestMove (Point target){											// === Looks at adjacent tiles for the one closest to the player ===================							
+	public Point getBestMove (Point target){									// === Looks at adjacent tiles for the one closest to the player ===================							
 		double closest = Double.POSITIVE_INFINITY;
 		Point bestMove = new Point();
 		int pX = piratePos.x;
@@ -100,8 +100,8 @@ public class Pirate2 implements Observer, Character2{
 			for (int y = pY - 1; y < pY + 2; y++){
 				double dist = getDistance(x, y, target);					
 					
-				if (moveIsLegal(x, y) && dist < closest){								// === In theory this should be preventing the selection of island tiles ===========
-					closest = dist;														// === while updating best move with the closest available tile ====================
+				if (moveIsLegal(x, y) && dist < closest){						// === In theory this should be preventing the selection of island tiles ===========
+					closest = dist;									// === while updating best move with the closest available tile ====================
 					bestMove.setLocation(x, y);
 				}
 			}
@@ -118,7 +118,7 @@ public class Pirate2 implements Observer, Character2{
 	
  
 	
-	public Point getRandMove(){															// === Chooses a legal random move ==================================================
+	public Point getRandMove(){											// === Chooses a legal random move ==================================================
 		Point randMove = new Point();
 		int pX = piratePos.x;
 		int pY = piratePos.y;
@@ -129,7 +129,7 @@ public class Pirate2 implements Observer, Character2{
 			int x = pX + baseNum + rand.nextInt(3);
 			int y = pY + baseNum + rand.nextInt(3);
 			
-			if (moveIsLegal(x, y)){														// === In theory this should be preventing the selection of island tiles =============
+			if (moveIsLegal(x, y)){										// === In theory this should be preventing the selection of island tiles =============
 				randMove.setLocation(x, y);
 				legalMoveNotFound = false;
 				return randMove;
@@ -149,7 +149,7 @@ public class Pirate2 implements Observer, Character2{
 				double dist = getDistance(x, y, playerPos);					
 					
 				if (dist < closest){													
-					closest = dist;														// === while updating best move with the closest available tile ======================
+					closest = dist;									// === while updating best move with the closest available tile ======================
 					bestMove.setLocation(x, y);
 				}
 			}
@@ -186,12 +186,12 @@ public class Pirate2 implements Observer, Character2{
 	}
 	
 	
-	public boolean isIsland (int x, int y){												// === Verifies that this space is not occupied by an island =========================
+	public boolean isIsland (int x, int y){										// === Verifies that this space is not occupied by an island =========================
 		return grid[x][y];
 	}
 	
 	
-	public boolean legalX(int x){														// === Verifies this X is within bounds of the grid ==================================
+	public boolean legalX(int x){											// === Verifies this X is within bounds of the grid ==================================
 		if (x >= 0 && x <= grid.length - 1){ 
 			return true;
 		}
@@ -199,7 +199,7 @@ public class Pirate2 implements Observer, Character2{
 	}
 	
 	
-	public boolean legalY(int y){														// === Verifies this Y is within bounds of the grid ==================================
+	public boolean legalY(int y){											// === Verifies this Y is within bounds of the grid ==================================
 		if (y >= 0 && y <= grid[0].length - 1){
 			return true;
 		}
@@ -212,7 +212,7 @@ public class Pirate2 implements Observer, Character2{
 	
 	
 	// ======================= Vision ========================================================================================================================================	
-	public boolean canSeePlayer(){														// === Determines if the Pirate is close enough and has clear LOS to see the player ==
+	public boolean canSeePlayer(){											// === Determines if the Pirate is close enough and has clear LOS to see the player ==
 		if (inViewRange() && !viewBlocked()){
 			lastSeenPlayerPos.setLocation(playerPos.x, playerPos.y); 
 			return true;
@@ -220,7 +220,7 @@ public class Pirate2 implements Observer, Character2{
 		return false;
 	}
 	
-	public boolean inViewRange(){														// === Determines if the pirate is close enough to see the player ====================
+	public boolean inViewRange(){											// === Determines if the pirate is close enough to see the player ====================
 		if (getDistance(piratePos.x, piratePos.y, playerPos) <= sightRange()){						
 			return true;
 		}
@@ -228,16 +228,16 @@ public class Pirate2 implements Observer, Character2{
 	}
 	
 	
-	public boolean viewBlocked(){														// === Determines if an island exists between the player and the viewer ==============
+	public boolean viewBlocked(){											// === Determines if an island exists between the player and the viewer ==============
 		Point tileViewed = getClosestMoveToPlayer(piratePos.x, piratePos.y);
-		for (int i = 0; i < sightRange(); i++){											// === Searches the tiles between the player and the pirate out to a limit of the pirates sightRange
-			if (isIsland(tileViewed.x, tileViewed.y)){									// === Returns true if it finds and island in the tile that is being viewed ==========
+		for (int i = 0; i < sightRange(); i++){									// === Searches the tiles between the player and the pirate out to a limit of the pirates sightRange
+			if (isIsland(tileViewed.x, tileViewed.y)){							// === Returns true if it finds and island in the tile that is being viewed ==========
 				return true;
-			} else {																	// === Updates the tile to be viewed for the next iteration ==========================
+			} else {											// === Updates the tile to be viewed for the next iteration ==========================
 				tileViewed = getClosestMoveToPlayer(tileViewed.x, tileViewed.y);
 			}
 		}
-		return false;																	// === Did not find an island ========================================================
+		return false;												// === Did not find an island ========================================================
 	}
 	
 	
